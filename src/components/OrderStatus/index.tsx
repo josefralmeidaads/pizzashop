@@ -1,6 +1,6 @@
 import React from 'react';
 
-type IOrderStatus = {
+export type IOrderStatus = {
   status: "pending" | "canceled" | "processing" | "delivering" | "delivered";
 }
 
