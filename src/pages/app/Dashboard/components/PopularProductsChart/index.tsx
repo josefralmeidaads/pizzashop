@@ -8,6 +8,8 @@ import {
  ResponsiveContainer
 } from 'recharts';
 import colors from 'tailwindcss/colors';
+import { useQuery } from '@tanstack/react-query';
+import { getPopularProducts } from '@/api/getPopularProducts';
 
 const data = [
  { product: 'Pepperoni', amount: 40 },
@@ -26,6 +28,11 @@ const COLORS = [
 ]
 
 const PopularProductsChart: React.FC = () => {
+  const { data: popularProducts } = useQuery({
+    queryFn: getPopularProducts,
+    queryKey: ['metrics', 'popular-products'],
+  })
+
   return (
    <Card className="col-span-3">
     <CardHeader className="pb-8">
@@ -35,10 +42,10 @@ const PopularProductsChart: React.FC = () => {
      </div>
     </CardHeader>
     <CardContent>
-     <ResponsiveContainer width="100%" height={240}>
+     {popularProducts && (<ResponsiveContainer width="100%" height={240}>
       <PieChart style={{ fontSize: 12 }}>
        <Pie 
-        data={data}
+        data={popularProducts}
         dataKey="amount"
         nameKey="product"
         cx="50%"
@@ -68,16 +75,16 @@ const PopularProductsChart: React.FC = () => {
              textAnchor={x > cx ? 'start' : 'end'}
              dominantBaseline="central"
            >
-             {data[index].product.length > 12
-               ? data[index].product.substring(0, 12).concat('...')
-               : data[index].product}{' '}
+             {popularProducts[index].product.length > 12
+               ? popularProducts[index].product.substring(0, 12).concat('...')
+               : popularProducts[index].product}{' '}
              ({value})
            </text>
          )
        }}
        labelLine={false}
        >
-        {data.map((_, index) => (
+        {popularProducts.map((_, index) => (
          <Cell 
           key={`cell-${index}`} 
           fill={COLORS[index]}
@@ -86,7 +93,7 @@ const PopularProductsChart: React.FC = () => {
         ))}
        </Pie>
       </PieChart>
-     </ResponsiveContainer>
+     </ResponsiveContainer>)}
     </CardContent>
    </Card>
   );
