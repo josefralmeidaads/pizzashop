@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getOrders } from '@/api/getOrders';
 import { useSearchParams } from 'react-router-dom';
 import { z } from 'zod';
+import OrderTableSkeleton from './components/OrderTableSkeleton';
 
 const Orders = () => {
   const [searchParams, setSerachParams] = useSearchParams();
@@ -17,7 +18,7 @@ const Orders = () => {
 
   const pageIndex =  z.coerce.number().transform(page => page - 1).parse(searchParams.get("page") ?? '1');
 
-  const { data: result } = useQuery({
+  const { data: result, isLoading: isLoadingOrders } = useQuery({
     queryKey: ["orders", pageIndex, orderId, customerName, status],
     queryFn: () => getOrders({ pageIndex, orderId: orderId ?? '', customerName: customerName ?? '', status: status === "all" ? null : status}),
   })
@@ -53,6 +54,7 @@ const Orders = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
+            {isLoadingOrders && <OrderTableSkeleton />}
             {result && result.orders.map((order) => (
               <OrderTableRow order={order}  key={order.orderId}/>
             ))}

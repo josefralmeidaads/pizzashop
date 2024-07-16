@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useQuery } from '@tanstack/react-query';
 import { DollarSign } from 'lucide-react';
 import React from 'react';
+import MetricCardSkeleton from '../MetricCardSkeleton';
 
 const MonthCanceledOrdersAmountCard: React.FC = () => {
   const { data: monthOrdersCanceledAmount } = useQuery({
@@ -16,7 +17,7 @@ const MonthCanceledOrdersAmountCard: React.FC = () => {
      <DollarSign className="h-4 w-4 text-muted-foreground"/>
    </CardHeader>
    <CardContent className="space-y-1">
-      {monthOrdersCanceledAmount && (
+      {monthOrdersCanceledAmount ? (
         <>
           <span className="text-2xl font-bold tracking-tight">
           {monthOrdersCanceledAmount.amount.toLocaleString("pt-BR")}
@@ -38,7 +39,9 @@ const MonthCanceledOrdersAmountCard: React.FC = () => {
               </>
             }
           </p>
-        </>)
+        </>) : (
+          <MetricCardSkeleton />
+        )
       }
    </CardContent>
    </Card>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { BarChart } from 'lucide-react';
+import { BarChart, Loader2 } from 'lucide-react';
 import {
  Cell,
  Pie,
@@ -42,7 +42,7 @@ const PopularProductsChart: React.FC = () => {
      </div>
     </CardHeader>
     <CardContent>
-     {popularProducts && (<ResponsiveContainer width="100%" height={240}>
+     {popularProducts ? (<ResponsiveContainer width="100%" height={240}>
       <PieChart style={{ fontSize: 12 }}>
        <Pie 
         data={popularProducts}
@@ -93,7 +93,11 @@ const PopularProductsChart: React.FC = () => {
         ))}
        </Pie>
       </PieChart>
-     </ResponsiveContainer>)}
+     </ResponsiveContainer>) : (
+      <div className="flex h-[240px] w-full items-center justify-center">
+        <Loader2 className="h-8 w-8 text-muted-foreground animate-spin"/>
+      </div>
+     )}
     </CardContent>
    </Card>
   );

@@ -16,11 +16,12 @@ import { Label } from '@/components/ui/label';
 import { DateRangePicker } from '@/components/DateRangePicker';
 import { DateRange } from 'react-day-picker';
 import { subDays } from 'date-fns';
+import { Loader2 } from 'lucide-react';
 
 const RevenueChart: React.FC = () => {
   const [dateRange, setDateRange] = useState<DateRange | undefined>({
-    from: subDays(new Date(), 31),
-    to: new Date(),
+    from: subDays(new Date(), 35),
+    to: subDays(new Date(), 31),
   })
 
   const { data: dailyRevenueInPeriod } = useQuery({
@@ -54,7 +55,7 @@ const RevenueChart: React.FC = () => {
      </div>
     </CardHeader>
     <CardContent>
-     {dailyRevenueInPeriod && (<ResponsiveContainer width="100%" height={240}>
+     {dailyRevenueInPeriod ? (<ResponsiveContainer width="100%" height={240}>
       <LineChart data={chartData} style={{ fontSize: 12}}>
        <YAxis 
         stroke="#888" 
@@ -72,7 +73,11 @@ const RevenueChart: React.FC = () => {
        <Line type="linear" strokeWidth="2" dataKey="receipt" stroke={colors.violet['500']}/>
        <CartesianGrid vertical={false} className="stroke-muted"/>
       </LineChart>
-     </ResponsiveContainer>)}
+     </ResponsiveContainer>) : (
+      <div className="flex h-[240px] w-full items-center justify-center">
+        <Loader2 className="h-8 w-8 text-muted-foreground animate-spin"/>
+      </div>
+     )}
     </CardContent>
    </Card>
   );
