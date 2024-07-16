@@ -41,7 +41,7 @@ const RevenueChart: React.FC = () => {
   }, [dailyRevenueInPeriod])
 
   return (
-   <Card className="col-span-6">
+   <Card className="lg:col-span-6 sm:col-span-9">
     <CardHeader className="flex-row items-center justify-between pb-8">
      <div className="space-y-1">
       <CardTitle className="text-base font-medium">Receita no período</CardTitle>
