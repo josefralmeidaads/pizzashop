@@ -28,7 +28,7 @@ const RevenueChart: React.FC = () => {
       from: dateRange?.from,
       to: dateRange?.to,
     }),
-    queryKey: ['metrics', 'receipt-in-period', dateRange]
+    queryKey: ['metrics', 'receipt-in-period', dateRange],
   })
 
   const chartData = useMemo(() => {
