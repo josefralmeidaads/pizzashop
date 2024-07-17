@@ -1,4 +1,5 @@
 import NotFound from "@/pages/404";
+import Error from "@/pages/Error";
 import { AppLayout } from "@/pages/_layouts/app";
 import { AuthLayout } from "@/pages/_layouts/auth";
 import Dashboard from "@/pages/app/Dashboard";
@@ -11,7 +12,7 @@ export const router = createBrowserRouter([
  {
   path: '/',
   element: <AppLayout />,
-  errorElement: <NotFound />,
+  errorElement: <Error />,
   children: [
    {
     path: '/',
@@ -37,4 +38,8 @@ export const router = createBrowserRouter([
    },
   ]
  },
+ {
+  path: '*',
+  element: <NotFound />
+ }
 ])
