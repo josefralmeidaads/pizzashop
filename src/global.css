@@ -1,7 +1,6 @@
 @tailwind base;
   @tailwind components;
   @tailwind utilities;
-
   
 @layer base {
   :root {
@@ -49,7 +48,6 @@
     --ring: 0 72.2% 50.6%;
   }
 }
-
 
   @layer base {
     * {
