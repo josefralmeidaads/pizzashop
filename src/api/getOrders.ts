@@ -4,7 +4,7 @@ export interface IGetOrdersQuery {
   pageIndex?: number | null;
   orderId?: string;
   customerName?: string;
-  status?: string;
+  status?: "pending" | "canceled" | "processing" | "delivering" | "delivered";
 }
 export interface IGetOrdersResponse {
   orders: {
