@@ -35,14 +35,14 @@ const SignIn = () => {
     try {
       await authenticate({ email: data.email });
 
-      toast.success('Enviamos u link de autenticação para seu e-mail.', {
+      toast.success('Enviamos um link de autenticação para seu e-mail.', {
         action: {
           label: 'Reenviar',
           onClick: () => handleSignIn(data)
         }
       })
     } catch(err){
-
+      toast.error("Falha ao realizar login.")
     }
   }
   return (

@@ -46,7 +46,7 @@ const SignUp = () => {
         }
       })
     }catch(err){
-
+      toast.error("Erro ao cadastrar novo estabelecimento.")
     }
   }
   return (
