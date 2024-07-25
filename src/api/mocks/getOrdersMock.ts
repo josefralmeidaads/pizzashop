@@ -18,7 +18,7 @@ const orders: IOrders = Array.from({ length: 60 }).map((_, index) => {
   orderId: `order-${index+1}`,
   customerName: `Customer-${index + 1}`,
   status: statuses[index % 5],
-  total: Math.floor(Math.random() * (Math.floor(90000) - Math.ceil(1000)) + Math.ceil(1000)),
+  total: 24000,
   createdAt: new Date(),
  }
 })
